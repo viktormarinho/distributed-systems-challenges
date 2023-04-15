@@ -1,0 +1,176 @@
+2023-04-15 19:26:00,726{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w echo --bin target/debug/distributed-systems-chall --nodes n1 --time-limit 10 --log-stderr
+2023-04-15 19:26:00,782{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count nil
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x68f67bbd"
+         "maelstrom.db$db$reify__16142@68f67bbd"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "echo"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x4a03c4bc" "2023-04-15T19:26:00.707-03:00"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x3d0c88f4"
+         "maelstrom.net$jepsen_net$reify__15251@3d0c88f4"]
+ :client
+ #object[maelstrom.workload.echo$client$reify__16863
+         "0x5aad4194"
+         "maelstrom.workload.echo$client$reify__16863@5aad4194"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x50a1c2f3"
+         "java.util.concurrent.CyclicBarrier@50a1c2f3"]
+ :log-stderr true
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x453ca7f"
+         "jepsen.checker$compose$reify__11881@453ca7f"]
+ :argv
+ ("test"
+  "-w"
+  "echo"
+  "--bin"
+  "target/debug/distributed-systems-chall"
+  "--nodes"
+  "n1"
+  "--time-limit"
+  "10"
+  "--log-stderr")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@5d41b929"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@6dd0e2f4"]})
+ :nodes ["n1"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "target/debug/distributed-systems-chall"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x4ce66169"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@4ce66169"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x53d0cf4d"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@53d0cf4d"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.EachThread
+                                {:fresh-gen #object[maelstrom.workload.echo$workload$fn__16882
+                                                    "0x3c6c87fa"
+                                                    "maelstrom.workload.echo$workload$fn__16882@3c6c87fa"],
+                                 :context-filters #object[clojure.core$promise$reify__8591
+                                                          "0xd7645b2"
+                                                          {:status :pending,
+                                                           :val nil}],
+                                 :gens {}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x72e4905c"
+         "maelstrom.net$jepsen_os$reify__15254@72e4905c"]
+ :time-limit 10
+ :workload :echo
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2023-04-15 19:26:02,256{GMT}	INFO	[jepsen node n1] maelstrom.net: Starting Maelstrom network
+2023-04-15 19:26:02,258{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2023-04-15 19:26:02,261{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2023-04-15 19:26:02,264{GMT}	INFO	[jepsen node n1] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2023-04-15 19:26:02,266{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2023-04-15 19:26:02,267{GMT}	INFO	[jepsen node n1] maelstrom.process: launching target/debug/distributed-systems-chall []
+2023-04-15 19:26:02,291{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2023-04-15 19:26:02,312{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:echo	"Please echo 10"
+2023-04-15 19:26:07,326{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:info	:echo	"Please echo 10"	:net-timeout
+2023-04-15 19:26:07,328{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:invoke	:echo	"Please echo 53"
+2023-04-15 19:26:07,338{GMT}	WARN	[n1 stdout] maelstrom.process: Error!
+java.lang.AssertionError: Assert failed: Invalid source for message #maelstrom.net.message.Message{:id 27777, :src "c2", :dest "n1", :body {:msg_id 1, :in_reply_to nil, :type "echo", :echo "Please echo 10"}}
+(get queues (:src m))
+	at maelstrom.net$validate_msg.invokeStatic(net.clj:171)
+	at maelstrom.net$validate_msg.invoke(net.clj:165)
+	at maelstrom.net$send_BANG_.invokeStatic(net.clj:200)
+	at maelstrom.net$send_BANG_.invoke(net.clj:188)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879$fn__15881.invoke(process.clj:147)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878.invoke(process.clj:140)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-04-15 19:26:12,328{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:info	:echo	"Please echo 53"	:net-timeout
+2023-04-15 19:26:12,362{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2023-04-15 19:26:12,417{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2023-04-15 19:26:14,271{GMT}	INFO	[jepsen node n1] maelstrom.net: Shutting down Maelstrom network
+2023-04-15 19:26:14,272{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2023-04-15 19:26:14,889{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2023-04-15 19:26:14,898{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/viktormp/repos/distributed-systems-chall/store/echo/20230415T192600.707-0300/results.edn
+2023-04-15 19:26:14,921{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? false,
+         :count 2,
+         :ok-count 0,
+         :fail-count 0,
+         :info-count 2,
+         :by-f {:echo {:valid? false,
+                       :count 2,
+                       :ok-count 0,
+                       :fail-count 0,
+                       :info-count 2}}},
+ :availability {:valid? true, :ok-fraction 0.0},
+ :net {:all {:send-count 27778,
+             :recv-count 27778,
+             :msg-count 27778,
+             :msgs-per-op 13889.0},
+       :clients {:send-count 27778,
+                 :recv-count 27778,
+                 :msg-count 27778},
+       :servers {:send-count 0,
+                 :recv-count 0,
+                 :msg-count 0,
+                 :msgs-per-op 0.0},
+       :valid? true},
+ :workload {:valid? true, :errors ()},
+ :valid? false}
+
+
+Analysis invalid! (ﾉಥ益ಥ）ﾉ ┻━┻
