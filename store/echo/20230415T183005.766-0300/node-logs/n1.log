@@ -1,4 +1,0 @@
-
-
- RECEIVED 
-Message { src: "c0", dst: "n1", body: Body { msg_id: Some(1), in_reply_to: None, payload: Init { node_id: "n1", node_ids: ["n1"] } } }
